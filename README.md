@@ -13,11 +13,19 @@ Answer the following questions using SparkSQL:
   - What is the average price of a home per "view" rating having an average home price greater than or equal to $350,000? Determine the run time for this query, and round off your answer to two decimal places.
 
 Cache your temporary table home_sales.
+
 Check if your temporary table is cached.
+
 Using the cached data, run the last query that calculates the average price of a home per "view" rating having an average home price greater than or equal to $350,000. Determine the runtime and compare it to uncached runtime.
+
 Partition by the "date_built" field on the formatted parquet home sales data.
+
 Create a temporary table for the parquet data.
+
 Run the last query that calculates the average price of a home per "view" rating having an average home price greater than or equal to $350,000. Determine the runtime and compare it to uncached runtime.
+
 Uncache the home_sales temporary table.
+
 Verify that the home_sales temporary table is uncached using PySpark.
+
 Download Home_Sales.ipynb file and upload it into "Home_Sales" GitHub repository.
