@@ -8,9 +8,53 @@ Create a temporary table called home_sales.
 
 Answer the following questions using SparkSQL:
   - What is the average price for a four-bedroom house sold for each year? Round off your answer to two decimal places.
+      query = """
+        SELECT YEAR(date) AS year, ROUND(AVG(price), 2) AS avg_price
+        FROM home_sales
+        WHERE bedrooms = 4
+        GROUP BY year
+        ORDER BY year;
+        """
+      spark.sql(query).show()
+
   - What is the average price of a home for each year the home was built, that has three bedrooms and three bathrooms? Round off your answer to two decimal places.
+      query = """
+        SELECT date_built, ROUND(AVG(price), 2) AS avg_price
+        FROM home_sales
+        WHERE bedrooms = 3
+        AND bathrooms = 3
+        GROUP BY date_built
+        ORDER BY date_built DESC;
+        """
+
+      spark.sql(query).show()
+
   - What is the average price of a home for each year the home was built, that has three bedrooms, three bathrooms, two floors, and is greater than or equal to 2,000 square feet? Round off your answer to two decimal places.
+      query = """
+        SELECT date_built, ROUND(AVG(price), 2) AS avg_price
+        FROM home_sales
+        WHERE bedrooms = 3
+        AND bathrooms = 3
+        AND floors = 2
+        AND sqft_living >= 2000
+        GROUP BY date_built
+        ORDER BY date_built;
+        """
+    spark.sql(query).show()
+
   - What is the average price of a home per "view" rating having an average home price greater than or equal to $350,000? Determine the run time for this query, and round off your answer to two decimal places.
+      start_time = time.time()
+      query = """
+        SELECT view, ROUND(AVG(price), 2) AS avg_price
+        FROM home_sales
+        GROUP BY view
+        HAVING AVG(price) >= 350000
+        ORDER BY view DESC;
+        """
+      spark.sql(query).show()
+      print("--- %s seconds ---" % (time.time() - start_time))
+      start_time = time.time()
+      print("--- %s seconds ---" % (time.time() - start_time))
 
 Cache your temporary table home_sales.
 
